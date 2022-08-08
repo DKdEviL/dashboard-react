@@ -11,3 +11,23 @@
   font-weight: bolder;
   right: 5px;
 }
+
+.sidebar_btn.btn.btn-light {
+  background: transparent;
+  position: relative;
+}
+.sidebar_btn.btn-light:active,
+.sidebar_btn.btn-light:hover,
+.sidebar_btn.btn-light:focus {
+  outline: none;
+  border: none;
+}
+.sidebar_btn.btn-light.active::before {
+  position: absolute;
+  left: 0;
+  content: '|';
+  top: -15px;
+  font-size: 45px;
+  font-weight: bold;
+  color: rgb(135, 135, 236);
+}
