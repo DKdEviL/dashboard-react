@@ -13,7 +13,7 @@ const Dashboard = () => {
     }
   }, [user]);
   return (
-    <div>
+    <div className="d-flex flex-column justify-content-center align-items-center align-items-md-start vw-100 vh-100 px-5">
       <h1> Welcome back to Skrate!!</h1>
       <button onClick={logOut}>Sign out with google</button>
     </div>
