@@ -9,10 +9,12 @@ import {
 import { UserContext } from "../providers/UserProvider";
 import NavBar from "./components/NavBar";
 import sessionLogo from "../assets/sessions.svg";
+import jobsLogo from '../assets/jobs.svg'
 
 const Dashboard = () => {
   const user: any = useContext(UserContext);
   const navigate = useNavigate();
+  const oneDay = 24*60*60*1000;
   const [userData, setUserData] = useState<UserInterfaceProps>({
     displayName: "",
     photoURL: "",
@@ -32,6 +34,34 @@ const Dashboard = () => {
       });
   }, []);
 
+  const timeSince = (date: any) => {
+
+    var seconds = Math.floor((new Date().getTime() - date) / 1000);
+  
+    var interval = seconds / 31536000;
+  
+    if (interval > 1) {
+      return Math.floor(interval) + " years";
+    }
+    interval = seconds / 2592000;
+    if (interval > 1) {
+      return Math.floor(interval) + " months";
+    }
+    interval = seconds / 86400;
+    if (interval > 1) {
+      return Math.floor(interval) + " days";
+    }
+    interval = seconds / 3600;
+    if (interval > 1) {
+      return Math.floor(interval) + " hours";
+    }
+    interval = seconds / 60;
+    if (interval > 1) {
+      return Math.floor(interval) + " minutes";
+    }
+    return Math.floor(seconds) + " seconds";
+  }
+
   useEffect(() => {
     if (!user.user) {
       navigate("/home");
@@ -50,8 +80,8 @@ const Dashboard = () => {
       ) : (
         <Container>
           <Row>
-            <Col md={6}>
-              <Row xs={1} sm={1} md={2} className="border border-1 p-2 m-2">
+            <Col md={6} className="p-3 p-md-0">
+              <Row xs={1} sm={1} md={2} className="border border-1 p-2 m-2 fw-semibold rounded">
                 <Col md={12} className="my-3">
                   <span className="fs-4">Overview</span>
                 </Col>
@@ -62,12 +92,12 @@ const Dashboard = () => {
                   >
                     <span
                       style={{ color: "#181818" }}
-                      className="fw-semibold m-3"
+                      className="fw-semibold my-2"
                     >
                       Profile Views
                     </span>
                     <span
-                      className="fs-5 fw-semibold mx-5 my-3"
+                      className="fs-5 fw-semibold mx-3 my-3"
                       style={{ color: "#4F65F6" }}
                     >
                       {dashboardData?.dashboard_stats.profile_views}
@@ -81,12 +111,12 @@ const Dashboard = () => {
                   >
                     <span
                       style={{ color: "#181818" }}
-                      className="fw-semibold m-3"
+                      className="fw-semibold my-2"
                     >
                       Mentorship Sessions
                     </span>
                     <span
-                      className="fs-5 fw-semibold mx-5 my-3"
+                      className="fs-5 fw-semibold mx-3 my-3"
                       style={{ color: "#4F65F6" }}
                     >
                       {dashboardData?.dashboard_stats.mentorship_sessions}
@@ -100,12 +130,12 @@ const Dashboard = () => {
                   >
                     <span
                       style={{ color: "#181818" }}
-                      className="fw-semibold m-3"
+                      className="fw-semibold my-2"
                     >
                       Jobs Applied
                     </span>
                     <span
-                      className="fs-5 fw-semibold mx-5 my-3"
+                      className="fs-5 fw-semibold mx-3 my-3"
                       style={{ color: "#4F65F6" }}
                     >
                       {dashboardData?.dashboard_stats.jobs_applied}
@@ -119,12 +149,12 @@ const Dashboard = () => {
                   >
                     <span
                       style={{ color: "#181818" }}
-                      className="fw-semibold m-3"
+                      className="fw-semibold my-3"
                     >
                       Skills Verified
                     </span>
                     <span
-                      className="fs-5 fw-semibold mx-5 my-3"
+                      className="fs-5 fw-semibold mx-3 my-3"
                       style={{ color: "#4F65F6" }}
                     >
                       {dashboardData?.dashboard_stats.skills_verified}
@@ -132,7 +162,7 @@ const Dashboard = () => {
                   </Alert>
                 </Col>
               </Row>
-              <Row className="border border-1 p-2 m-2">
+              <Row className="border border-1 p-2 m-2 rounded">
                 <Col md={12} className="my-3">
                   <span className="fs-4 fw-semibold">Upcoming Sessions</span>
                 </Col>
@@ -174,86 +204,35 @@ const Dashboard = () => {
               </Row>
             </Col>
             <Col md={6}>
-              <Row className="border border-2 p-2 m-2">
+              <Row className="border border-1 p-2 m-2 rounded">
                 <Col md={12} className="my-3">
-                  <span className="fs-4">New Jobs</span>
+                  <span className="fs-4 fw-semibold">New Jobs</span>
                 </Col>
-                <Col md={12}>
-                  <Alert
-                    variant="info"
-                    className="d-flex align-items-center justify-content-between border-0 my-2"
-                  >
-                    <span
-                      style={{ color: "#181818" }}
-                      className="fw-semibold m-3"
-                    >
-                      Profile Views
-                    </span>
-                    <span
-                      className="fs-5 fw-semibold mx-5 my-3"
-                      style={{ color: "#4F65F6" }}
-                    >
-                      {dashboardData?.dashboard_stats.profile_views}
-                    </span>
-                  </Alert>
-                </Col>
-                <Col md={12}>
-                  <Alert
-                    variant="info"
-                    className="d-flex align-items-center justify-content-between border-0 my-2"
-                  >
-                    <span
-                      style={{ color: "#181818" }}
-                      className="fw-semibold m-3"
-                    >
-                      Mentorship Sessions
-                    </span>
-                    <span
-                      className="fs-5 fw-semibold mx-5 my-3"
-                      style={{ color: "#4F65F6" }}
-                    >
-                      {dashboardData?.dashboard_stats.mentorship_sessions}
-                    </span>
-                  </Alert>
-                </Col>
-                <Col md={12}>
-                  <Alert
-                    variant="info"
-                    className="d-flex align-items-center justify-content-between border-0 my-2"
-                  >
-                    <span
-                      style={{ color: "#181818" }}
-                      className="fw-semibold m-3"
-                    >
-                      Jobs Applied
-                    </span>
-                    <span
-                      className="fs-5 fw-semibold mx-5 my-3"
-                      style={{ color: "#4F65F6" }}
-                    >
-                      {dashboardData?.dashboard_stats.jobs_applied}
-                    </span>
-                  </Alert>
-                </Col>
-                <Col md={12}>
-                  <Alert
-                    variant="info"
-                    className="d-flex align-items-center justify-content-between border-0 my-2"
-                  >
-                    <span
-                      style={{ color: "#181818" }}
-                      className="fw-semibold m-3"
-                    >
-                      Skills Verified
-                    </span>
-                    <span
-                      className="fs-5 fw-semibold mx-5 my-3"
-                      style={{ color: "#4F65F6" }}
-                    >
-                      {dashboardData?.dashboard_stats.skills_verified}
-                    </span>
-                  </Alert>
-                </Col>
+                {dashboardData?.job_postings.map((job) => {
+                  return (
+                    <Row key={job.date_posted + job.organization_name + "-jobs"}>
+                      <Alert
+                        variant="light"
+                        className="d-flex align-items-center border-0 my-2 position-relative after-arrow"
+                      >
+                        <img src={jobsLogo} height={50} width={50} alt="logo" />
+                        <div
+                          className="flex-column mx-3"
+                          style={{ minWidth: "35%" }}
+                        >
+                          <p className="d-flex flex-column justify-content-between">
+                            <span className="fw-semibold">{job.role}</span>
+                            <span>{job.organization_name}</span>
+                            <span>{job.location}</span>
+                          </p>
+                        </div>
+                        <p className="d-flex justify-content-center align-items-center">
+                            {timeSince(new Date(job.date_posted).getTime() - oneDay) + ` Ago`}
+                        </p>
+                      </Alert>
+                    </Row>
+                  );
+                })}
               </Row>
             </Col>
           </Row>
