@@ -76,7 +76,9 @@ const Dashboard = () => {
     <div>
       <NavBar displayName={userData.displayName} photoURL={userData.photoURL} />
       {isDataFetching ? (
-        <Spinner animation="grow" />
+        <div className="position-absolute top-50 end-50">
+            <Spinner animation="grow"/>
+        </div>
       ) : (
         <Container>
           <Row>
