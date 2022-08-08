@@ -27,7 +27,7 @@ const HomePage = (props: HomePageProps) => {
       </div>
       <div className="d-flex flex-column justify-content-center align-items-center align-items-md-start vw-100 vh-100 px-5">
       <h1> Welcome back to Skrate!!</h1>
-      <Button variant="primary" onClick={signInWithGoogle}>Sign in with google</Button>
+      <Button className="px-5" variant="primary" onClick={signInWithGoogle}>Sign In With Google</Button>
     </div>
       </>
     
