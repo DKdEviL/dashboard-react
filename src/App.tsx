@@ -10,9 +10,6 @@ import Dashboard from './pages/Dashboard';
 function App() {
   return (
     <UserProvider>
-      <div style={{position: 'absolute', top: '-10px', left: '-10px'}}>
-        <img src={logo} />
-      </div>
     <Router>
       <Routes>
       <Route path='/' element={<HomePage name='deepak' />} />

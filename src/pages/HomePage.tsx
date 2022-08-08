@@ -7,6 +7,7 @@ import { UserContext } from "../providers/UserProvider";
 
 import wave from '../assets/wave.svg';
 import girl from '../assets/bg-image.svg';
+import NavBar from "./components/NavBar";
 
 const HomePage = (props: HomePageProps) => {
   const user = useContext(UserContext);
@@ -19,6 +20,7 @@ const HomePage = (props: HomePageProps) => {
   }, [user]);
   return (
     <>
+    <NavBar displayName={''} photoURL={''}/>
     <div style={{position: 'absolute', top: '0', right: '0'}}>
         <img src={wave} style={{width: '40vw', aspectRatio: '1'}}/>
       </div>
